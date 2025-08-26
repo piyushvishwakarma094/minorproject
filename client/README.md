@@ -19,7 +19,6 @@ A full-stack web application that helps users find travel partners from their ci
 - Axios for API calls
 - Socket.io-client for real-time chat
 - CSS for styling
-
 ### Backend
 - Node.js with Express.js
 - MongoDB with Mongoose
@@ -169,3 +168,5 @@ Backend (`.env`):
 3. Make your changes
 4. Test thoroughly
 5. Submit a pull request
+# minorhost
+# minorhost
