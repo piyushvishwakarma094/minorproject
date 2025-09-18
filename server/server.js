@@ -27,7 +27,7 @@ app.use(cors({
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://mongo:LJzjUCvwXyoSHbjFcPXZNezrIFHuJPNe@switchyard.proxy.rlwy.net:27203', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://mongo:LJzjUCvwXyoSHbjFcPXZNezrIFHuJPNe@mongodb.railway.internal:27017',{
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
