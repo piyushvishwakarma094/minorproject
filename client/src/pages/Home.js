@@ -27,9 +27,10 @@ const Home = () => {
   const fetchRecentPosts = async () => {
     try {
       const response = await axios.get('/api/posts?limit=6');
-      setRecentPosts(response.data.posts);
+      setRecentPosts(response.data.posts || []);
     } catch (error) {
       console.error('Error fetching recent posts:', error);
+      setRecentPosts([]); // Set empty array on error
     } finally {
       setLoading(false);
     }
@@ -49,7 +50,7 @@ const Home = () => {
   const features = [
     {
       icon: MagnifyingGlassIcon,
-      title: 'Find Travel Partners',
+      title: 'Find Travel Companions',
       description: 'Search for trips by destination, date, and connect with like-minded travelers.'
     },
     {
@@ -60,30 +61,33 @@ const Home = () => {
     {
       icon: ChatBubbleLeftRightIcon,
       title: 'Real-time Chat',
-      description: 'Communicate instantly with potential travel partners through our messaging system.'
+      description: 'Communicate instantly with potential travel companions through our messaging system.'
     }
   ];
 
   return (
     <div className="space-y-12">
       {/* Hero Section */}
-      <section className="text-center py-12 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl">
-        <div className="max-w-4xl mx-auto px-6">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Find Your Perfect Travel Partner
+      <section className="text-center py-12 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white rounded-2xl relative overflow-hidden">
+        <div className="absolute inset-0 bg-black opacity-10"></div>
+        <div className="max-w-4xl mx-auto px-6 relative z-10">
+          <h1 className="hero-title text-4xl md:text-6xl font-bold mb-6 gradient-text">
+            Find Your Perfect Travel Companion
           </h1>
-          <p className="text-xl md:text-2xl mb-8 opacity-90">
+          <p className="hero-subtitle text-xl md:text-2xl mb-8 opacity-90">
             Connect with travelers from your city and explore the world together
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/posts" className="btn-primary bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg">
+          <div className="hero-buttons flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/posts" className="btn-primary bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg hover-glow">
               Find Trips
             </Link>
-            <Link to="/register" className="btn-secondary bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 text-lg">
+            <Link to="/register" className="btn-secondary bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 text-lg hover-lift">
               Join Now
             </Link>
           </div>
         </div>
+        <div className="absolute top-10 left-10 w-20 h-20 bg-white opacity-10 rounded-full animate-float"></div>
+        <div className="absolute bottom-10 right-10 w-16 h-16 bg-white opacity-10 rounded-full animate-float" style={{animationDelay: '1s'}}></div>
       </section>
 
       {/* Search Section */}
@@ -139,11 +143,11 @@ const Home = () => {
 
       {/* Features Section */}
       <section className="py-12">
-        <h2 className="text-3xl font-bold text-center mb-12">Why Choose TravelPartner?</h2>
+        <h2 className="text-3xl font-bold text-center mb-12 animate-fade-in">Why Choose TripConnect?</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <div key={index} className="card text-center">
-              <feature.icon className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+            <div key={index} className="feature-card card text-center hover-lift">
+              <feature.icon className="feature-icon h-12 w-12 text-blue-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
               <p className="text-gray-600">{feature.description}</p>
             </div>
@@ -174,40 +178,42 @@ const Home = () => {
               </div>
             ))}
           </div>
-        ) : recentPosts.length > 0 ? (
+        ) : recentPosts && recentPosts.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {recentPosts.map((post) => (
-              <Link key={post._id} to={`/posts/${post._id}`} className="card hover:shadow-lg transition-shadow">
+              <Link key={post?._id || Math.random()} to={`/posts/${post?._id}`} className="post-card card-interactive">
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="font-semibold text-lg text-gray-800 line-clamp-2">
-                    {post.title}
+                    {post?.title || 'Untitled Trip'}
                   </h3>
                   <span className={`badge ${
-                    post.status === 'active' ? 'badge-green' : 
-                    post.status === 'full' ? 'badge-yellow' : 'badge-red'
+                    post?.status === 'active' ? 'badge-green' : 
+                    post?.status === 'full' ? 'badge-yellow' : 'badge-red'
                   }`}>
-                    {post.status}
+                    {post?.status || 'unknown'}
                   </span>
                 </div>
                 
                 <div className="space-y-2 mb-4">
                   <div className="flex items-center text-gray-600">
                     <MapIcon className="h-4 w-4 mr-2" />
-                    <span className="text-sm">{post.fromCity} → {post.toCity}</span>
+                    <span className="text-sm">{post?.fromCity || 'Unknown'} → {post?.toCity || 'Unknown'}</span>
                   </div>
                   <div className="flex items-center text-gray-600">
                     <CalendarIcon className="h-4 w-4 mr-2" />
-                    <span className="text-sm">{format(new Date(post.travelDate), 'MMM dd, yyyy')}</span>
+                    <span className="text-sm">
+                      {post?.travelDate ? format(new Date(post.travelDate), 'MMM dd, yyyy') : 'Date TBD'}
+                    </span>
                   </div>
                   <div className="flex items-center text-gray-600">
                     <ClockIcon className="h-4 w-4 mr-2" />
-                    <span className="text-sm">{post.travelTime}</span>
+                    <span className="text-sm">{post?.travelTime || 'Time TBD'}</span>
                   </div>
                 </div>
 
                 <div className="flex justify-between items-center text-sm text-gray-500">
-                  <span>By {post.creator.name}</span>
-                  <span>{post.currentParticipants}/{post.maxParticipants} joined</span>
+                  <span>By {post?.creator?.name || 'Unknown User'}</span>
+                  <span>{post?.currentParticipants || 0}/{post?.maxParticipants || 0} joined</span>
                 </div>
               </Link>
             ))}
@@ -216,7 +222,7 @@ const Home = () => {
           <div className="text-center py-12">
             <MapIcon className="h-16 w-16 text-gray-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-600 mb-2">No trips available</h3>
-            <p className="text-gray-500 mb-6">Be the first to create a trip and find travel partners!</p>
+            <p className="text-gray-500 mb-6">Be the first to create a trip and find travel companions!</p>
             <Link to="/create-post" className="btn-primary">
               Create First Trip
             </Link>
@@ -228,7 +234,7 @@ const Home = () => {
       <section className="bg-gray-100 rounded-2xl p-8 text-center">
         <h2 className="text-3xl font-bold mb-4">Ready to Start Your Journey?</h2>
         <p className="text-xl text-gray-600 mb-8">
-          Join thousands of travelers who have found their perfect travel partners
+          Join thousands of travelers who have found their perfect travel companions
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link to="/register" className="btn-primary px-8 py-3 text-lg">

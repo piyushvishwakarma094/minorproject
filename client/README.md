@@ -1,13 +1,13 @@
-# Travel Partner Finder
+# TripConnect
 
-A full-stack web application that helps users find travel partners from their city. Built with React.js, Node.js, Express, and MongoDB.
+A full-stack web application that helps users find travel companions from their city. Built with React.js, Node.js, Express, and MongoDB.
 
 ## Features
 - **User Authentication:** Secure registration and login with JWT tokens
 - **Travel Posts:** Create and browse travel posts with details like from/to cities, date, time, and notes
 - **Search & Filter:** Find posts by from city, to city, and date
 - **Comments:** Users can comment on posts to express interest
-- **Join Trips:** Users can join existing trips as travel partners
+- **Join Trips:** Users can join existing trips as travel companions
 - **Real-time Chat:** Private messaging between users using Socket.io
 - **User Profiles:** View and edit user profiles with basic information
 - **Responsive Design:** Mobile-friendly interface
@@ -170,3 +170,6 @@ Backend (`.env`):
 5. Submit a pull request
 # minorhost
 # minorhost
+# minorclient
+# minorclient
+# client

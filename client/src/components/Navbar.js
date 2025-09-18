@@ -46,7 +46,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <MapIcon className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold text-gray-800">TravelPartner</span>
+            <span className="text-xl font-bold text-gray-800">TripConnect</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -55,13 +55,13 @@ const Navbar = () => {
               <Link
                 key={path}
                 to={path}
-                className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`nav-link flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
                   isActive(path)
-                    ? 'text-blue-600 bg-blue-50'
+                    ? 'text-blue-600 bg-blue-50 active'
                     : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
                 }`}
               >
-                <Icon className="h-4 w-4" />
+                <Icon className="h-4 w-4 transition-transform duration-200 hover:scale-110" />
                 <span>{label}</span>
               </Link>
             ))}
@@ -70,13 +70,13 @@ const Navbar = () => {
               <Link
                 key={path}
                 to={path}
-                className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`nav-link flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
                   isActive(path)
-                    ? 'text-blue-600 bg-blue-50'
+                    ? 'text-blue-600 bg-blue-50 active'
                     : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
                 }`}
               >
-                <Icon className="h-4 w-4" />
+                <Icon className="h-4 w-4 transition-transform duration-200 hover:scale-110" />
                 <span>{label}</span>
               </Link>
             ))}

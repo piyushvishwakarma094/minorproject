@@ -1,7 +1,7 @@
 {
-  "name": "travel-partner-finder",
+  "name": "tripconnect",
   "version": "1.0.0",
-  "description": "A full-stack web application to help users find travel partners",
+  "description": "A full-stack web application to help users find travel companions",
   "main": "server/server.js",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
@@ -17,7 +17,7 @@
     "heroku-postbuild": "npm run install-all && npm run build"
   },
   "keywords": ["travel", "partner", "finder", "react", "nodejs", "mongodb"],
-  "author": "Travel Partner Finder Team",
+  "author": "TripConnect Team",
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^7.6.0"

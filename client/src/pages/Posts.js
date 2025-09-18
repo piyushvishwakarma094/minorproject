@@ -210,7 +210,7 @@ const Posts = () => {
               <Link
                 key={post._id}
                 to={`/posts/${post._id}`}
-                className="card hover:shadow-lg transition-shadow group"
+                className="post-card card-interactive group"
               >
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="font-semibold text-lg text-gray-800 group-hover:text-blue-600 transition-colors line-clamp-2">
@@ -264,7 +264,7 @@ const Posts = () => {
               <button
                 onClick={() => handlePageChange(pagination.currentPage - 1)}
                 disabled={pagination.currentPage === 1}
-                className="btn-secondary disabled:opacity-50 disabled:cursor-not-allowed"
+                className="pagination-btn btn-secondary disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Previous
               </button>
@@ -276,10 +276,10 @@ const Posts = () => {
                     <button
                       key={page}
                       onClick={() => handlePageChange(page)}
-                      className={`px-3 py-2 rounded-md text-sm font-medium ${
+                      className={`pagination-btn px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                         page === pagination.currentPage
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                          ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg'
+                          : 'bg-gray-200 text-gray-700 hover:bg-gray-300 hover:scale-105'
                       }`}
                     >
                       {page}
@@ -291,7 +291,7 @@ const Posts = () => {
               <button
                 onClick={() => handlePageChange(pagination.currentPage + 1)}
                 disabled={pagination.currentPage === pagination.totalPages}
-                className="btn-secondary disabled:opacity-50 disabled:cursor-not-allowed"
+                className="pagination-btn btn-secondary disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Next
               </button>

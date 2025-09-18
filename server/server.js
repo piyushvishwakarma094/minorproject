@@ -14,20 +14,20 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
+    origin: process.env.CLIENT_URL || "https://client-git-main-piyushvishwakarma07234-2039s-projects.vercel.app/",
     methods: ["GET", "POST"]
   }
 });
 
 // Middleware
 app.use(cors({
-  origin: process.env.CLIENT_URL || "http://localhost:3000",
+  origin: process.env.CLIENT_URL || "https://client-git-main-piyushvishwakarma07234-2039s-projects.vercel.app/",
   credentials: true
 }));
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/travel-partner-finder', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://mongo:LJzjUCvwXyoSHbjFcPXZNezrIFHuJPNe@switchyard.proxy.rlwy.net:27203', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
